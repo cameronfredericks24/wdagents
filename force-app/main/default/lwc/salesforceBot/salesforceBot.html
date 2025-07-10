@@ -1,0 +1,36 @@
+<!-- aiObjectBuilder.html -->
+<template>
+    <lightning-card title="Salesforce Bot" icon-name="utility:magicwand">
+        <div class="slds-m-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+
+            <lightning-textarea
+                name="prompt"
+                label="Describe the Custom Object you want to build"
+                placeholder="e.g., A simple project management object with fields for Project Name, Due Date, Status, and Budget."
+                value={prompt}
+                onchange={handlePromptChange}
+                required
+            ></lightning-textarea>
+
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button
+                    variant="brand"
+                    label="Build"
+                    title="Build Object"
+                    onclick={handleBuildObject}
+                    disabled={isButtonDisabled}
+                ></lightning-button>
+            </div>
+
+            <template if:true={responseMessage}>
+                <div class={messageClass}>
+                    <p>{responseMessage}</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
