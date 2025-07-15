@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    
+        <fullName>Approver_Note__c</fullName>
+        <description>Note from the approver.</description>
+        
+        <label>Approver Note</label>
+        <length>32000</length>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Approval Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bid</fullName>
+                <default>false</default>
+                <label>Bid</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bid_Approval_Pending</fullName>
+                <default>false</default>
+                <label>Bid Approval Pending</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Approved</fullName>
+                <default>false</default>
+                <label>EOI Approved</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Pending_Approval</fullName>
+                <default>false</default>
+                <label>EOI Pending Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Rejected</fullName>
+                <default>false</default>
+                <label>EOI Rejected</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not_Approved</fullName>
+                <default>false</default>
+                <label>Not Approved</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending_Approval</fullName>
+                <default>false</default>
+                <label>Pending Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent_for_Bid_No_Bid</fullName>
+                <default>false</default>
+                <label>Sent for Bid/No Bid</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent_for_EOI_Submission_Approval</fullName>
+                <default>false</default>
+                <label>Sent for EOI Submission Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No_Bid</fullName>
+                <default>false</default>
+                <label>No Bid</label>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Related_Lead_Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Related Lead/Opportunity</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Approval Activities</relationshipLabel>
+        <relationshipName>Approval_Activities</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Role_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Role Name</label>
+        
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Approval Activity</label>
+    <nameField>
+        
+        <label>Record Name</label><type>Text</type>
+    </nameField>
+    <pluralLabel>Approval Activities</pluralLabel>
+    
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

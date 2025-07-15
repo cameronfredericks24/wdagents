@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "ai-metadata-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.5.1",
+    "@google/generative-ai": "^0.24.1",
+    "body-parser": "^2.2.0",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fast-xml-parser": "^5.2.5",
+    "fs-extra": "^11.3.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^5.5.1",
+    "uuid": "^11.1.0"
+  }
+}

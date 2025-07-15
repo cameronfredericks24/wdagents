@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="👥 Team Login Activity">
+        <template if:true={users}>
+            <div class="slds-grid slds-wrap slds-p-around_medium">
+                <template for:each={users} for:item="user">
+                    <div key={user.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-box user-card">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <div class="avatar">{user.initials}</div>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-heading_small">{user.Name}</p>
+                                <p class="slds-text-body_small">🗓 {user.lastLoginDisplay}</p>
+                                <span class={user.statusClass}>
+                                    {user.emoji} {user.Status}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_medium">Error: {error}</p>
+        </template>
+    </lightning-card>
+</template>

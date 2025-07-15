@@ -1,0 +1,42 @@
+<template>
+    <lightning-card class="main-card" title="✨ AI Metadata Assistant">
+        <div class="slds-p-around_large">
+            <div class="slds-text-heading_large slds-text-color_brand slds-m-bottom_medium" style="text-align:center;">
+                <span style="font-size:2.5rem;">🤖</span> Salesforce Metadata Generator
+            </div>
+            <div class="slds-form-element slds-m-bottom_large">
+                <label class="slds-form-element__label" for="userPrompt">Describe what you want to create</label>
+                <div class="slds-form-element__control">
+                    <textarea id="userPrompt" class="slds-textarea" placeholder="e.g. Create a custom object named Visit__c with fields user__c (Lookup User), visit_date__c (Date), status__c (Picklist: Scheduled, Completed)..." value={userPrompt} onchange={handlePromptChange} rows="5"></textarea>
+                </div>
+            </div>
+            <div class="slds-align_absolute-center slds-m-bottom_large">
+                <lightning-button label="Generate Metadata" variant="brand" onclick={handleGenerate}></lightning-button>
+            </div>
+
+            <template if:true={metadataPreview}>
+                <div class="slds-box slds-theme_default slds-m-bottom_large">
+                    <div class="slds-text-title_bold slds-m-bottom_small">Generated Metadata Preview</div>
+                    <pre>{displayMetadataPreview}</pre>
+                </div>
+                <div class="slds-align_absolute-center">
+                    <template if:true={isLoading}>
+                        <div class="slds-m-bottom_medium">
+                            <lightning-spinner alternative-text="Deploying" size="medium"></lightning-spinner>
+                            <div class="slds-text-body_regular slds-m-top_small">Deployment in progress...</div>
+                        </div>
+                    </template>
+                    <template if:false={isLoading}>
+                        <lightning-button label="Deploy to Salesforce" variant="success" onclick={handleDeploy}></lightning-button>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={resultMessage}>
+                <div class="slds-m-top_large slds-align_absolute-center">
+                    <lightning-formatted-rich-text value={resultMessage}></lightning-formatted-rich-text>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template> 

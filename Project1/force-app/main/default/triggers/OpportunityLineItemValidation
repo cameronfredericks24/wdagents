@@ -1,0 +1,44 @@
+trigger OpportunityLineItemValidation on OpportunityLineItem (before update) {
+    // Collect Opportunity IDs
+    Set<Id> opportunityIds = new Set<Id>();
+    
+    // Collect OpportunityLineItems that are being updated
+    for (OpportunityLineItem oli : Trigger.new) {
+        opportunityIds.add(oli.OpportunityId);
+    }
+
+    // Query Sales Split records related to the OpportunityLineItems being updated
+    Map<Id, Sales_Split__c> salesSplits = new Map<Id, Sales_Split__c>();
+    for (Sales_Split__c split : [
+        SELECT Id, Approval_Status_c__c, Opportunity_Line_Item__c 
+        FROM Sales_Split__c 
+        WHERE Opportunity_Line_Item__c IN :Trigger.new
+    ]) {
+        salesSplits.put(split.Opportunity_Line_Item__c, split);
+    }
+
+    // Query Opportunities that are in Closed Won stage
+    Map<Id, Opportunity> opportunities = new Map<Id, Opportunity>();
+    for (Opportunity opp : [
+        SELECT Id, StageName 
+        FROM Opportunity 
+        WHERE Id IN :opportunityIds AND StageName = 'Closed Won'
+    ]) {
+        opportunities.put(opp.Id, opp);
+    }
+
+    // Validate Opportunity Line Items
+    for (OpportunityLineItem oli : Trigger.new) {
+        // Check if the Opportunity is in Closed Won
+        Opportunity opp = opportunities.get(oli.OpportunityId);
+        Sales_Split__c split = salesSplits.get(oli.Id);
+        
+        if (opp != null && opp.StageName == 'Closed Won') {
+            // Prevent updates if the Opportunity is in Closed Won
+            oli.addError('This Opportunity is in Closed Won. You cannot edit the Opportunity Line Item.');
+        } else if (split != null && split.Approval_Status_c__c != 'Approved') {
+            // Prevent updates if the related Sales Split is not approved
+            oli.addError('You cannot edit this Opportunity Line Item because the related Sales Split is not approved.');
+        }
+    }
+}

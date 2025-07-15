@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Approval Activity</label>
+    <pluralLabel>Approval Activities</pluralLabel>
+    <nameField>
+        
+        <label>Record Name</label><type>Text</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    
+        <fullName>Related_Record__c</fullName>
+        
+        <label>Related Lead/Opportunity</label>
+        <referenceTo>Lead;Opportunity</referenceTo>
+        <relationshipLabel>Approval Activities</relationshipLabel>
+        <relationshipName>Approval_Activities</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Approval Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pending_Approval</fullName>
+                <label>Pending Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent_for_EOI_Submission_Approval</fullName>
+                <label>Sent for EOI Submission Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Pending_Approval</fullName>
+                <label>EOI Pending Approval</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Approved</fullName>
+                <label>EOI Approved</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EOI_Rejected</fullName>
+                <label>EOI Rejected</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent_for_Bid_No_Bid</fullName>
+                <label>Sent for Bid/No Bid</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bid_Approval_Pending</fullName>
+                <label>Bid Approval Pending</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bid</fullName>
+                <label>Bid</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No_Bid</fullName>
+                <label>No Bid</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <label>Approved</label>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not_Approved</fullName>
+                <label>Not Approved</label>
+            </picklistValues>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Approver_Note__c</fullName>
+        <externalId>false</externalId>
+        <label>Approver Note</label>
+        <length>32000</length>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Role_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Role Name</label>
+        
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+    </fields>
+</CustomObject>

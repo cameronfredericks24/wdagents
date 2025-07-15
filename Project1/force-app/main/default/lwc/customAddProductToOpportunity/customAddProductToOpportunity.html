@@ -1,0 +1,100 @@
+<template>
+    <lightning-card title="Add Products to Opportunity">
+        <div class="slds-p-around_medium">
+            <template if:true={products}>
+                <lightning-layout multiple-rows>
+                    <template for:each={products} for:item="product" for:index="index">
+                        <lightning-layout-item key={product.Product2Id} size="12" padding="around-small">
+                            <div class="slds-box slds-box_xx-small slds-theme_default">
+                                <lightning-layout horizontal-align="spread">
+                                    <lightning-layout-item size="12">
+                                        <lightning-input type="checkbox"
+                                                         label={product.ProductName}
+                                                         data-index={index}
+                                                         checked={product.isSelected}
+                                                         onchange={handleCheckboxChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="3" padding="around-small">
+                                        <lightning-input type="number"
+                                                         label="Quantity"
+                                                         name="Quantity"
+                                                         value={product.Quantity}
+                                                         data-index={index}
+                                                         min="1"
+                                                         onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="3" padding="around-small">
+                                        <lightning-input type="number"
+                                                         label="Sales Price"
+                                                         name="SalesPrice"
+                                                         value={product.SalesPrice}
+                                                         data-index={index}
+                                                         step="0.01"
+                                                         onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="3" padding="around-small">
+                                        <lightning-input type="text"
+                                                         label="Variant"
+                                                         name="Variant"
+                                                         value={product.Variant}
+                                                         data-index={index}
+                                                         onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="3" padding="around-small">
+                                        <lightning-combobox
+                                            name="Validity"
+                                            label="Validity"
+                                            data-index={index}
+                                            value={product.Validity}
+                                            options={validityOptions}
+                                            onchange={handleInputChange}>
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="6" padding="around-small">
+                                        <p class="slds-text-body_small">
+                                            <strong>Tax:</strong> {product.Tax}
+                                        </p>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="6" padding="around-small">
+                                        <p class="slds-text-body_small">
+                                            <strong>Total Price:</strong> {product.TotalPrice}
+                                        </p>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="12" padding="around-small">
+                                        <p class="slds-text-body_small">
+                                            <strong>List Price:</strong> {product.ListPrice}
+                                        </p>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+
+                <div class="slds-m-top_medium slds-align_absolute-center">
+                    <lightning-button label="Save Selected Products"
+                                      variant="brand"
+                                      onclick={handleSave}>
+                    </lightning-button>
+                </div>
+            </template>
+
+            <template if:false={products}>
+                <p>Loading products...</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
