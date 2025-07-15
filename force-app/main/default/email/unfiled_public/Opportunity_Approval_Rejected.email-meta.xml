@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Rejection notification for Opportunity</description>
+    <subject>Opportunity Rejected</subject>
+    <name>Opportunity_Approval_Rejected</name>
+    <uiType>Standard</uiType>
+    <encoding>UTF-8</encoding>
+    <htmlValue><![CDATA[<p>The Opportunity has been rejected.</p>]]></htmlValue>
+    <available>true</available>
+</EmailTemplate> 

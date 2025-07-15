@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Approval notification for Opportunity</description>
+    <subject>Opportunity Approved</subject>
+    <name>Opportunity_Approval_Approved</name>
+    <uiType>Standard</uiType>
+    <encoding>UTF-8</encoding>
+    <htmlValue><![CDATA[<p>The Opportunity has been approved.</p>]]></htmlValue>
+    <available>true</available>
+</EmailTemplate> 

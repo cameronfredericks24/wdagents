@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom Opportunity Process</fullName>
+    <description>Stages for customised Opportunity path</description>
+    <isActive>true</isActive>
+    <values>
+        <fullName>Closed Lost</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Closed Won</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Meeting</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Negotiation%2FReview</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>New</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Proposal%2FPrice Quote</fullName>
+        <default>false</default>
+    </values>
+</BusinessProcess>

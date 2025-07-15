@@ -1,0 +1,110 @@
+<!-- Simplified AI Metadata Generator UI -->
+<template>
+  <lightning-card title="AI Metadata Generator" icon-name="standard:approval">
+    <div class="slds-p-around_medium">
+      <!-- Simple Header -->
+      <div class="slds-m-bottom_medium">
+        <h2 class="slds-text-heading_medium">Salesforce Metadata Automation</h2>
+        <p class="slds-text-body_regular slds-text-color_weak slds-m-bottom_medium">
+          Effortlessly build Salesforce objects, fields, and approval processes from natural language prompts.
+        </p>
+        <lightning-button 
+          label="Clear All" 
+          variant="neutral" 
+          onclick={handleClear}
+          class="slds-m-top_x-small">
+        </lightning-button>
+            </div>
+
+      <!-- Simple Examples List -->
+      <div class="slds-m-bottom_medium">
+        <h3 class="slds-text-heading_small slds-m-bottom_small">Prompt Examples</h3>
+        <ul class="slds-list_dotted slds-m-left_medium">
+          <li class="slds-m-bottom_small"><strong>Custom Object:</strong> Create an object <code>Consulting_Firm__c</code> with fields: Name (Text), Industry (Picklist: IT, Finance, Healthcare, Legal), Headquarters (Text), Number of Employees (Number).</li>
+          <li class="slds-m-bottom_small"><strong>Approval Process:</strong> Create an approval process for <code>Consulting_Firm__c</code>: Assign to Consulting Approver.</li>
+          <li class="slds-m-bottom_small"><strong>Custom Object:</strong> Create an object <code>Event_Registration__c</code> with fields: Event Name (Text), Attendee (Lookup to Contact), Registration Date (Date), Status (Picklist: Registered, Attended, Cancelled).</li>
+          <li class="slds-m-bottom_small"><strong>Approval Process:</strong> Create an approval process for <code>Event_Registration__c</code>: Step 1 to Event Manager, Set Status__c to 'Attended' on final approval, Set Status__c to 'Cancelled' on rejection.</li>
+          <li class="slds-m-bottom_small"><strong>Custom Object:</strong> Create an object <code>Project_Budget__c</code> with fields: Project Name (Text), Budget Amount (Currency), Department (Picklist: IT, HR, Finance, Marketing), Approved (Checkbox).</li>
+          <li class="slds-m-bottom_small"><strong>Approval Process:</strong> Create an approval process for <code>Project_Budget__c</code>: Step 1 to Department Manager, Step 2 to Finance Team if Budget_Amount__c &gt; 100000, Set Approved__c to true on final approval.</li>
+          <li class="slds-m-bottom_small"><strong>Custom Object:</strong> Create an object <code>Travel_Request__c</code> with fields: Employee (Lookup to User), Destination (Text), Amount (Currency), Date (Date), Status (Picklist: Submitted, Approved, Rejected).</li>
+          <li class="slds-m-bottom_small"><strong>Approval Process:</strong> Create an approval process for <code>Travel_Request__c</code>: Step 1 to Manager, Step 2 to Finance queue if Amount__c &gt; 5000, Set Status__c to 'Approved' on final approval, Set Status__c to 'Rejected' on rejection.</li>
+        </ul>
+            </div>
+
+      <!-- Input Section -->
+      <div class="slds-form-element slds-m-bottom_medium">
+        <label class="slds-form-element__label" for="prompt-input">
+          <abbr class="slds-required" title="required">*</abbr>
+          Describe your approval process or object
+        </label>
+        <div class="slds-form-element__control">
+            <lightning-textarea
+            id="prompt-input"
+                name="prompt"
+                value={prompt}
+            placeholder="e.g., Create an approval process for Expense_Report__c with steps: Step 1 to Manager, Step 2 to Finance if Amount > 1000"
+                onchange={handlePromptChange}
+            rows="4"
+            maxlength="2000">
+          </lightning-textarea>
+        </div>
+            </div>
+
+      <!-- Action Buttons -->
+      <div class="slds-m-bottom_medium">
+                <lightning-button
+          label="Generate Metadata" 
+                    variant="brand"
+                    onclick={handleBuildObject}
+                    disabled={isButtonDisabled}
+          loading={isLoading}
+          class="slds-m-right_medium">
+        </lightning-button>
+        <lightning-button 
+          label="Clear" 
+          variant="neutral" 
+          onclick={handleClear}>
+        </lightning-button>
+            </div>
+
+      <!-- Response Message -->
+            <template if:true={responseMessage}>
+        <div class={messageClass} role="alert">
+          <lightning-icon 
+            icon-name={messageIcon}
+            size="x-small" 
+            class="slds-m-right_x-small">
+          </lightning-icon>
+          <span>{responseMessage}</span>
+                </div>
+            </template>
+
+      <!-- Simple Details Display -->
+      <template if:true={details}>
+        <div class="slds-box slds-box_xx-small slds-theme_shade slds-m-top_medium">
+          <h3 class="slds-text-heading_small slds-m-bottom_small">Generated Details</h3>
+          <dl class="slds-dl_horizontal">
+            <dt class="slds-text-title_bold">Object Name:</dt>
+            <dd>{formattedDetails.objectName}</dd>
+            <dt class="slds-text-title_bold">Label:</dt>
+            <dd>{formattedDetails.label}</dd>
+            <dt class="slds-text-title_bold">Fields:</dt>
+            <dd>
+              <ul class="slds-list_dotted slds-m-left_medium">
+                <template for:each={formattedDetails.fields} for:item="field">
+                  <li key={field.fieldName} class="slds-m-bottom_x-small">
+                    <strong>{field.label}</strong> <span class="slds-text-color_weak">(API: {field.fieldName})</span> — Type: {field.type}
+                    <template if:true={field.formattedValues}>
+                      <span class="slds-text-color_weak"> (Values: {field.formattedValues})</span>
+                    </template>
+                  </li>
+                </template>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </template>
+
+        </div>
+    </lightning-card>
+</template>

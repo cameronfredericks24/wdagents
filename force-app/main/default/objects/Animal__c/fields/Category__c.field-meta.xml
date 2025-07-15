@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <label>Category</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Herb</fullName>
+                <default>false</default>
+                <label>Herb</label>
+            </value>
+            <value>
+                <fullName>Carn</fullName>
+                <default>false</default>
+                <label>Carn</label>
+            </value>
+            <value>
+                <fullName>Omni</fullName>
+                <default>false</default>
+                <label>Omni</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

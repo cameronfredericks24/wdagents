@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location__c</fullName>
+    <label>Location</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New York</fullName>
+                <default>false</default>
+                <label>New York</label>
+            </value>
+            <value>
+                <fullName>London</fullName>
+                <default>false</default>
+                <label>London</label>
+            </value>
+            <value>
+                <fullName>Tokyo</fullName>
+                <default>false</default>
+                <label>Tokyo</label>
+            </value>
+            <value>
+                <fullName>Berlin</fullName>
+                <default>false</default>
+                <label>Berlin</label>
+            </value>
+            <value>
+                <fullName>required</fullName>
+                <default>false</default>
+                <label>required</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
