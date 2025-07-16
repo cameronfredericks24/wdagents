@@ -1,0 +1,107 @@
+<template>
+    <lightning-card title="Salesforce Agent Bots" icon-name="standard:bot">
+        <div class="slds-p-around_medium">
+            <!-- Profile List Buttons -->
+            <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                <div class="slds-col">
+                    <lightning-button 
+                        label="List All" 
+                        variant="brand" 
+                        onclick={listProfiles}
+                        class="slds-m-bottom_small">
+                    </lightning-button>
+                </div>
+                <div class="slds-col">
+                    <lightning-button 
+                        label="Suggest Cloneable Profiles" 
+                        variant="neutral" 
+                        onclick={suggestProfiles}
+                        class="slds-m-bottom_small">
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- Debug Profile Section -->
+            <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Debug Profile Resolution:</h3>
+                <div class="slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label" for="debugProfileInput">
+                        Profile Name to Debug:
+                    </label>
+                    <div class="slds-form-element__control">
+                        <lightning-input
+                            id="debugProfileInput"
+                            name="debugProfileInput"
+                            value={debugProfileName}
+                            onchange={handleDebugProfileInput}
+                            placeholder="Enter profile name (e.g., InternalProfile)"
+                            class="slds-m-bottom_small">
+                        </lightning-input>
+                    </div>
+                </div>
+                <lightning-button 
+                    label="Debug Profile" 
+                    variant="neutral" 
+                    onclick={debugProfile}
+                    class="slds-m-bottom_small">
+                </lightning-button>
+            </div>
+
+            <!-- Profile List Results -->
+            <template if:true={result}>
+                <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">Results:</h3>
+                    <pre class="slds-text-body_small">{result}</pre>
+                </div>
+            </template>
+
+            <!-- Error Display -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+
+            <!-- Input Section -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="userInput">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Enter your instruction
+                </label>
+                <div class="slds-form-element__control">
+                    <lightning-textarea
+                        id="userInput"
+                        name="userInput"
+                        value={userInput}
+                        onchange={handleInputChange}
+                        placeholder="Example: Create a profile called SalesProfile001 by cloning Standard User"
+                        rows="4">
+                    </lightning-textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <lightning-button 
+                label="Process Instruction" 
+                variant="brand" 
+                onclick={handleSendMessage}
+                disabled={isLoading}
+                class="slds-m-bottom_medium">
+            </lightning-button>
+
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Processing..." size="medium"></lightning-spinner>
+            </template>
+
+            <!-- Response Section -->
+            <template if:true={agentResponse}>
+                <div class="slds-box slds-theme_shade">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">Response:</h3>
+                    <pre class="slds-text-body_small">{agentResponse}</pre>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
